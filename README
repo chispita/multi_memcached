@@ -1,0 +1,32 @@
+
+Multiple instances via ports
+
+For this it needs to patch the init.d and start-memcached scripts to run multiple instances.
+
+After the patch it search for configuration files that match the following pattern /etc/memcached_*.conf. When it found no file it use the /etc/memcached.conf configuration file. So it breaks no backward compatibility.
+
+When you want to create 2 memached instances copy the configuration file and change the port, memory …
+
+cp /etc/memcached.conf /etc/memcached_myserver_1.conf
+cp /etc/memcached.conf /etc/memcached_myserver_2.conf
+
+Commands
+
+start all servers
+
+/etc/init.d/memcached start
+start only a specific server
+
+/etc/init.d/memcached start myserver_1
+stop all servers
+
+/etc/init.d/memcached stop
+stop only a specific server
+
+/etc/init.d/memcached stop myserver_1
+
+The patches
+
+/usr/share/memcached/scripts/start-memcached
+/etc/init.d/memcached
+
